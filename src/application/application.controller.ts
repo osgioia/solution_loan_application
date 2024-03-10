@@ -16,6 +16,8 @@ import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard';
 import { ApplicationService } from './application.service';
 import { CreateApplicationDto, EditApplicationDto } from './dto';
+import { Role } from '../roles/roles.enum'
+import { Roles } from '../decorators/roles.decorators'
 
 @UseGuards(JwtGuard)
 @ApiTags('Applications')
@@ -24,6 +26,7 @@ export class ApplicationController {
   constructor(private applicationService: ApplicationService) {}
 
   @Get()
+  @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Get all applications' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Application successfully' })
   getApplications(@GetUser('id') userId: number) {
