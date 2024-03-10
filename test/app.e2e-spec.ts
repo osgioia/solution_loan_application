@@ -136,7 +136,6 @@ describe('App e2e', () => {
     describe('Edit user', () => {
       it('should edit  user', () => {
         const dto: EditUserDto = {
-          firstName: 'Valdemar',
           email: 'valdemar@gmail.com',
         };
         return pactum
@@ -147,18 +146,17 @@ describe('App e2e', () => {
           })
           .withBody(dto)
           .expectStatus(200)
-          .expectBodyContains(dto.firstName)
           .expectBodyContains(dto.email);
       });
     });
   });
 
-  describe('Bookmarks', () => {
-    describe('Get empty bookmarks', () => {
-      it('should get bookmarks', () => {
+  describe('Applications', () => {
+    describe('Get empty applications', () => {
+      it('should get applications', () => {
         return pactum
           .spec()
-          .get('/bookmarks')
+          .get('/applications')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
@@ -167,27 +165,28 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Create bookmark', () => {
+    describe('Create application', () => {
       const dto: CreateApplicationDto = {
-        title: 'First Bookmark',
-        link: 'https://www.google.com',
+        amount: 1234,
+        purpose: 'First Loan',
+        status: 'Pending',
       };
-      it('should create bookmark', () => {
+      it('should create application', () => {
         return pactum
           .spec()
-          .post('/bookmarks')
+          .post('/applications')
           .withHeaders({ AUthorization: 'Bearer $S{userAt}' })
           .withBody(dto)
           .expectStatus(201)
-          .stores('bookmarkId', 'id');
+          .stores('Id', 'id');
       });
     });
 
-    describe('Get bookmarks', () => {
-      it('should get bookmarks', () => {
+    describe('Get applications', () => {
+      it('should get applications', () => {
         return pactum
           .spec()
-          .get('/bookmarks')
+          .get('/applications')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
@@ -196,59 +195,59 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Get bookmark by id', () => {
-      it('should get bookmark by id', () => {
+    describe('Get application by id', () => {
+      it('should get application by id', () => {
         return pactum
           .spec()
-          .get('/bookmarks/{id}')
-          .withPathParams('id', '$S{bookmarkId}')
+          .get('/applications/{id}')
+          .withPathParams('id', '$S{Id}')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
           .expectStatus(200)
-          .expectBodyContains('$S{bookmarkId}');
+          .expectBodyContains('$S{Id}');
       });
     });
 
-    describe('Edit bookmark by id', () => {
+    describe('Edit application by id', () => {
       const dto: EditApplicationDto = {
-        title: 'First Bookmark',
-        description: 'First Bookmark',
-        link: 'https://www.google.com',
+        amount: 1234,
+        purpose: 'First Loan 2',
+        status: 'Pending',
       };
 
-      it('should edit bookmark by id', () => {
+      it('should edit application by id', () => {
         return pactum
           .spec()
-          .patch('/bookmarks/{id}')
-          .withPathParams('id', '$S{bookmarkId}')
+          .patch('/applications/{id}')
+          .withPathParams('id', '$S{Id}')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
           .withBody(dto)
           .expectStatus(200)
-          .expectBodyContains(dto.title)
-          .expectBodyContains(dto.description)
-          .expectBodyContains(dto.link);
+          .expectBodyContains(dto.amount)
+          .expectBodyContains(dto.purpose)
+          .expectBodyContains(dto.status);
       });
     });
 
-    describe('Delete bookmark by id', () => {
-      it('should get bookmark by id', () => {
+    describe('Delete application by id', () => {
+      it('should get application by id', () => {
         return pactum
           .spec()
-          .delete('/bookmarks/{id}')
-          .withPathParams('id', '$S{bookmarkId}')
+          .delete('/applications/{id}')
+          .withPathParams('id', '$S{Id}')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
           .expectStatus(204);
       });
 
-      it('should get empty bookmarks', () => {
+      it('should get empty applications', () => {
         return pactum
           .spec()
-          .get('/bookmarks')
+          .get('/applications')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
