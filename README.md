@@ -1,78 +1,75 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-  <a href="http://docker.com/" target="blank"><img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="200" alt="Docker logo"/></a>
-  <a href="http://jwt.io" target="blank"><img src="https://vegibit.com/wp-content/uploads/2018/07/JSON-Web-Token-Authentication-With-Node.png" width="200" alt="JWT logo"></a>
-</p>
+# Loan Application Project
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/girordo/nestjs-api)](https://github.com/girordo/nestjs-api/commits/main)
+This project provides a backend for a loan application system.
 
-## Description
+## Prerequisites
 
-This is a little project just for educational and curiosity purpose.
-In this project I learned about:
-
-- How to setup a NestJS project
-- How to use the NestJS tooling (create controllers, services, modules)
-- Concept and how to use Guards
-- JWT Authentication Strategy with Guards
-- How to dockerize an NestJS application with PostgreSQL
-- How to make end-to-end tests (for integration purpose)
-
-## Installation
-
-```bash
-$ npm install or yarn
+```
+    Docker
+    Node.js and npm
 ```
 
-## Running the app
+## Instructions
 
-```bash
-# development
-$ npm run start or yarn start
+   ### Set up the environment:
+        Create a file named .env in your project directory. Copy the environment variables from .env.test to .env. These variables are essential for connecting to the database.
 
-# watch mode
-$ npm run start:dev or yarn start:dev
+   ### Install dependencies:
 
-# production mode
-$ npm run start:prod or yarn start:prod
-```
+        Open a terminal or command prompt and navigate to your project directory.
 
-## Test
+        Run the following command to install the project's dependencies:
 
-```bash
-# unit tests
-$ npm run test or yarn test
+        ```
+          npm install
+        ```
 
-# pretest command
-$ npm run pretest:e2e or yarn pretest:e2e
+## Seed the database (optional):
 
-# e2e tests
-$ npm run test:e2e
+    If you want to populate the database with initial data (seeds), run the following command:
 
-# test coverage
-$ npm run test:cov
-```
+    ```
+      npx prisma db seed
+    ```
 
-## Inspiration
+## Run the application:
 
-Besides the NestJS official docs I followed this two videos:
-https://www.youtube.com/watch?v=GHTA143_b-s
-https://www.youtube.com/watch?v=PfSyDd3Sc5A
-https://www.youtube.com/watch?v=X7RULL-wIhE
+  ### Start the application using npm:
 
-And the repo:
-https://github.com/NikhilCodes/nestjs-best-practices
+    ```
+      npm run start
+    ```
+        This will start the backend server, typically listening on port 3000 by default.
 
-All the dockerization and setting up the template can be found on the first video,
-in the second one I integrate Swagger with the api. In the third video I used the helmet properties but not implement the healthcheck with terminus module. (yet!)
-Although in the repo I used the middleware CORS code to implement a middleware for my self.
+  ### Access the API documentation:
 
-## License
+        Once the application is running, you can view the API documentation in your web browser at:
 
-This project is [MIT licensed](LICENSE).
+        http://localhost:3000/swagger
 
----
+## Using Docker Compose (optional)
 
-<div align="center">
-  <sub>Made with 💜 by <a href="https://github.com/girordo">Tarcísio Giroldo</a></sub>
-</div>
+This project also includes a docker-compose.yml file for a convenient way to run the application and its dependencies using Docker Compose.
+
+  ###  Build the Docker images:
+
+        If you haven't already, install Docker Compose. Refer to the official documentation for installation instructions: https://docs.docker.com/compose/install/
+
+        In your terminal, navigate to your project directory and run the following command:
+
+        ```
+          docker-compose build
+        ```
+    This will build the Docker images for the application and its dependencies.
+
+## Start the application:
+
+    Run the following command to start the application using Docker Compose:
+
+    ```
+      docker-compose up -d
+    ```
+
+The -d flag detaches the containers from the terminal, allowing them to run in the background.
+
+The application will be accessible at http://localhost:3000.
